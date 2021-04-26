@@ -1,3 +1,0 @@
-# hello-world
-first trial
-somthing ...

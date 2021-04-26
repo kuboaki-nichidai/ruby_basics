@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.12">
+<title>Rubyの基礎</title>
+<link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Rubyの基礎</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_rubyの概要">1. Rubyの概要</a>
+<ul class="sectlevel2">
+<li><a href="#_rubyはプログラミング言語">1.1. Rubyはプログラミング言語</a></li>
+<li><a href="#_rubyはスクリプト言語">1.2. Rubyはスクリプト言語</a></li>
+<li><a href="#_rubyはオブジェクト指向プログラミング言語">1.3. Rubyはオブジェクト指向プログラミング言語</a></li>
+<li><a href="#_オブジェクト指向がわからないとだめ">1.4. オブジェクト指向がわからないとだめ？</a></li>
+</ul>
+</li>
+<li><a href="#_文字列や数値を表示してみよう">2. 文字列や数値を表示してみよう</a>
+<ul class="sectlevel2">
+<li><a href="#_文字列操作を使おうstring_クラス">2.1. 文字列操作を使おう（String クラス）</a></li>
+<li><a href="#_文字列に名前をつける変数名">2.2. 文字列に名前をつける（変数名）</a></li>
+<li><a href="#_文字列を表示するprintメソッド">2.3. 文字列を表示する（printメソッド）</a></li>
+<li><a href="#_数値と四則演算を使おうnumeric_クラス">2.4. 数値と四則演算を使おう（Numeric クラス）</a></li>
+<li><a href="#_メソッドの実行結果や数値を文字列に埋め込む式展開">2.5. メソッドの実行結果や数値を文字列に埋め込む（式展開）</a></li>
+<li><a href="#_日付操作を使おうdate_クラス">2.6. 日付操作を使おう（Date クラス）</a></li>
+<li><a href="#_配列を使ってみようarray_クラス">2.7. 配列を使ってみよう（Array クラス）</a></li>
+<li><a href="#_ハッシュを使ってみようhash_クラス">2.8. ハッシュを使ってみよう（Hash クラス）</a></li>
+</ul>
+</li>
+<li><a href="#_まとめ">3. まとめ</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Rubyというプログラミング言語と、その基本的な使い方を紹介しておきます。</p>
+</div>
+<div class="paragraph">
+<p>Rubyの文法が調べたいときは、オンラインリファレンスを参照しましょう。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Rubyのリファレンスマニュアル</dt>
+<dd>
+<p><code><a href="https://www.ruby-lang.org/ja/documentation/" class="bare">https://www.ruby-lang.org/ja/documentation/</a></code></p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>バージョンごとに用意してあるので、自分がインストールしたバージョンに近い版を参照するとよいでしょう。</p>
+</div>
+<div class="paragraph">
+<p>Rubyで何かをしたいとき、どうやればよいか調べたいときは、逆引きサイトを使いましょう。</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">逆引きRuby</dt>
+<dd>
+<p><code><a href="https://sites.google.com/site/gyakuhikiruby/" class="bare">https://sites.google.com/site/gyakuhikiruby/</a></code></p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rubyの概要">1. Rubyの概要</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_rubyはプログラミング言語">1.1. Rubyはプログラミング言語</h3>
+<div class="paragraph">
+<p>Rubyは「まつもと ゆきひろ」さんが、手軽にオブジェクト指向でプログラミングするための言語として、個人で開発を始めたフリーソフトウェアのプログラミング言語です。
+現在では、世界中の非常にたくさんの人が利用している、よく知られた言語の1つとなっています。
+日本発のソフトウェアということもあって、書籍にもインターネット上にも日本語の情報がたくさんあります。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rubyはスクリプト言語">1.2. Rubyはスクリプト言語</h3>
+<div class="paragraph">
+<p>プログラミング言語には、プログラムを実行する前にあらかじめ変換を済ませておく「コンパイラ型言語」と、実行が指示されたあとでプログラムを変換する「インタプリタ型言語」があります。
+Rubyはインタプリタ型のプログラミング言語の仲間です。</p>
+</div>
+<div class="paragraph">
+<p>Rubyは、このスクリプト言語の仲間としてもよく知られています。
+コンピュータ上で動作する他のプログラムやライブラリを、自分が意図した台本（スクリプト）どおりに実行させるというわけです。
+スクリプト言語には、RubyのほかにLinuxのシェルに使われているBashや、Perl、Python、PHP、JavaScriptなどがあります。
+スクリプト言語は、すぐに実行できてテストや変更が容易なことから、技術や要求の変化が激しいWebアプリケーションの開発などによく利用されています。</p>
+</div>
+<div class="paragraph">
+<p>Rubyは、PerlやPythonと同じように、文字列の処理が得意な言語です。
+そのため、電子メールやWebアプリケーションのような、文字列の送受信を中心としたネットワークアプリケーションの世界でよく使われています。</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rubyはオブジェクト指向プログラミング言語">1.3. Rubyはオブジェクト指向プログラミング言語</h3>
+<div class="sect3">
+<h4 id="_オブジェクトとメッセージの世界">オブジェクトとメッセージの世界</h4>
+<div class="paragraph">
+<p>Rubyは、プログラムを作るときの考え方として「オブジェクト指向」を採用しています。
+オブジェクト指向について解説するのはこの講義の目的ではないので、少しだけ紹介しておきます。</p>
+</div>
+<div class="paragraph">
+<p>オブジェクト指向の「オブジェクト」は、日本語でいえば「もの」です。
+Rubyの世界での「もの」は、私たちが日本語で「もの」と思うものとは少し違っていて、なんらかの操作をすることができる対象全般を意味しています。
+つまり、操作すると何かしてくれそうなものは、具体的なものだけでなく概念的な存在でも、みんなオブジェクトとみなします。
+たとえば、数値や文字列、それらを組み合わせた複合的なデータ（伝票や住所録など）、ファイルやネットワーク、音声や画像、といったものもRubyの世界ではオブジェクトとして扱います。</p>
+</div>
+<div class="paragraph">
+<p>あるオブジェクトがほかのオブジェクトに処理をしてもらうには「メッセージ」を送ります。
+自動販売機で切符を販売する場合を例にして考えてみましょう。
+<a href="#message01">図 1</a> は切符の販売機と切符を買う人がオブジェクトで、切符を買う人が販売機に切符を販売してくれるよう依頼しているところです。</p>
+</div>
+<div id="message01" class="imageblock">
+<div class="content">
+<img src="images/IMG_0418.jpg" alt="IMG 0418" width="75%">
+</div>
+<div class="title">図 1. 切符を買う人と券売機の間のメッセージの例（1）</div>
+</div>
+<div class="paragraph">
+<p>このようなとき、オブジェクト指向の世界では、買う人から販売機へ「切符を販売する」というメッセージを送るといいます。
+このメッセージを受け取った販売機は、メッセージにしたがって切符を発行し販売する処理をするでしょう。</p>
+</div>
+<div class="paragraph">
+<p>みなさんの中には、 <a href="#massage02">[massage02]</a> のように買う人から、自動販売機へは「切符を購入する」というメッセージを送るのではないのか、と考える人もいませんか。</p>
+</div>
+<div id="message02" class="imageblock">
+<div class="content">
+<img src="images/IMG_0420.jpg" alt="IMG 0420" width="75%">
+</div>
+<div class="title">図 2. 切符を買う人と券売機の間のメッセージの例（2）</div>
+</div>
+<div class="paragraph">
+<p>でも、ちょっと考えてみてください。
+切符を購入するのは人の方で、販売機はこの人に切符を販売するのですよね。
+みなさんが窓口で買うときのことを思い出してみてください。
+みなさんは窓口の人に「上野から青森までの乗車券を（売って）ください。」などといいませんか。
+これがメッセージです。
+メッセージは、相手にやってほしいことを頼むようにして送るものなのですね。</p>
+</div>
+<div class="paragraph">
+<p>では、 <a href="#message03">図 3</a> 次の図のように販売機がジュースの自動販売機であったらどうでしょうか。
+この販売機は「切符を販売する」というメッセージに応えて処理することができませんね。
+このようなとき、Rubyでは「メッセージを処理するメソッドが見つからない」という例外処理が発生することになっています。</p>
+</div>
+<div id="message03" class="imageblock">
+<div class="content">
+<img src="images/IMG_0421.jpg" alt="IMG 0421" width="75%">
+</div>
+<div class="title">図 3. 切符を買う人とジュースの販売機の間のメッセージの例</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_オブジェクト指向プログラミング">オブジェクト指向プログラミング</h4>
+<div class="paragraph">
+<p><a href="#message01">図 1</a> から <a href="#message03">図 3</a> に登場したオブジェクトとメッセージの関係において、メッセージの送り手のオブジェクトを「センダー」、メッセージの受け取り手のオブジェクトを「レシーバ」と呼びます。
+ 受け取ったメッセージに応答してレシーバが処理をしますが、この処理を「メソッド」と呼びます。
+一般には、メッセージ名と、レシーバがそのメッセージを受け取ったときに処理を実行するメソッドの名前は、一致するとは限りません。
+ですが、Rubyでは、メッセージ名をメソッド名に使ってプログラムを書くことが多いようです（ <a href="#sender_reciever_message">図 4</a> ）。</p>
+</div>
+<div id="sender_reciever_message" class="imageblock">
+<div class="content">
+<img src="images/IMG_0422.jpg" alt="IMG 0422" width="75%">
+</div>
+<div class="title">図 4. センダーとレシーバ、メッセージの関係</div>
+</div>
+<div class="paragraph">
+<p><a href="#message_passing">図 5</a> は、電動モーターを使った搬送車が前進するときのメッセージの伝播する様子です。
+運搬車のメソッド「運搬する」の中で走行制御部にメッセージ「前進する」を送っています。
+このとき搬送車はメッセージのセンダー、走行制御部はメッセージのレシーバになっています。
+次に走行制御部がメソッド「前進する」の中で左右のモーターコントローラーにメッセージ「正転する」を送っています。
+こんどは走行制御部がメッセージのセンダーに、左右のモーターコントローラーがレシーバになっています。</p>
+</div>
+<div id="message_passing" class="imageblock">
+<div class="content">
+<img src="images/IMG_0423.jpg" alt="IMG 0423" width="75%">
+</div>
+<div class="title">図 5. プログラムはメッセージの伝播で動く</div>
+</div>
+<div class="paragraph">
+<p>このように、オブジェクトがメッセージを伝播することによって処理が進んでいくプログラムを、オブジェクト指向プログラムといいます。
+そして、オブジェクト指向プログラムを作るプログラミング方法のことを、オブジェクト指向プログラミングと呼んでいます。
+Rubyは、すべてのデータをオブジェクトとし、オブジェクト同士がメッセージを伝播しながら動作するようにプログラムを作る、オブジェクト指向プログラミング言語なのです。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_オブジェクト指向がわからないとだめ">1.4. オブジェクト指向がわからないとだめ？</h3>
+<div class="paragraph">
+<p>Rubyは、オブジェクト指向プログラムを作る言語ですが、それではオブジェクト指向がわからないと使うことができないのでしょうか。
+まつもとさんは、Rubyの原点的書籍である『オブジェクト指向スクリプト言語 Ruby』の中で、「Rubyのススメ」と称していろいろな人にRubyを勧めています。</p>
+</div>
+<div class="paragraph">
+<p>次のリストはその中からいくつか抜粋したものです。</p>
+</div>
+<div class="ulist">
+<div class="title">まつもとさんがRubyを勧める人（抜粋）</div>
+<ul>
+<li>
+<p>手軽にオブジェクト指向してみたい人</p>
+</li>
+<li>
+<p>入門用の言語を探している人</p>
+</li>
+<li>
+<p>使いやすいオブジェクト指向ライブラリがほしい人</p>
+</li>
+<li>
+<p>思いついたアイデアを手早く記述したい人</p>
+</li>
+<li>
+<p>日本人</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>また、同書の別のページでは「オブジェクト指向をあまり意識しなくてもプログラミングできる」ということも特徴にあげています。
+そうすると、みなさんにとってRubyは、これからプログラムを学ぶ人向けで、いろいろなライブラリを使って楽にプログラムを書けて、そんなにオブジェクト指向をわかっていなくても気にしなくて大丈夫な言語といえそうです。</p>
+</div>
+<div class="paragraph">
+<p>この演習も、あまりオブジェクト指向についてわかっていなくても進められるようにします。
+みなさんがRubyの言語仕様について広く詳細に理解していなくても大丈夫ですし、1度に多くのことを学ばなくても少しずつプログラムを作っていきましょう。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_文字列や数値を表示してみよう">2. 文字列や数値を表示してみよう</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>蔵書の管理をするときには、書籍名や著者のような名前がよくでてきます。
+また、価格は数値ですし、発行日や購入日は日付なのがわかります。
+Rubyの使い始めとして、蔵書のデータとして出てくる文字列や数値や日付を表示する方法を学びましょう。</p>
+</div>
+<div class="sect2">
+<h3 id="_文字列操作を使おうstring_クラス">2.1. 文字列操作を使おう（String クラス）</h3>
+<div class="paragraph">
+<p>まず、蔵書データの書籍名や著者を表すのに使う「文字列」の作り方と操作の方法を覚えましょう。
+Rubyで文字列を扱うときには、 <code>String</code> という名前のクラスを使います。
+クラスがどんなものなのかは、まだわからなくてもかまいません。
+文字列を作ったり、作った文字列を修正するような操作には、 <code>String</code> クラスが用意している操作（Rubyではメソッドと呼んでいます）を利用するということだけ覚えておきましょう。</p>
+</div>
+<div class="sect3">
+<h4 id="_演習新しい文字列を作る1文字列リテラルを使う">【演習】新しい文字列を作る（1）（文字列リテラルを使う）</h4>
+<div class="paragraph">
+<p>文字列を使うプログラムを動かしてみましょう（ <a href="#ex0301_rb">リスト 1</a> ）。</p>
+</div>
+<div class="paragraph">
+<p>テキストエディタで、 <code>codes</code> ディレクトリの <code>ex0301.rb</code> を編集して、次のようなプログラムを書きます。
+最初のプログラムですので、手順を少し詳しく書いておきます。</p>
+</div>
+<div class="olist arabic">
+<div class="title"><code>ex0301.rb</code> を作成する</div>
+<ol class="arabic">
+<li>
+<p>テキストエディタで、この演習用リポジトリの中の <code>codes</code> ディレクトリにあるファイル <code>ex0301.rb</code> を開く。</p>
+</li>
+<li>
+<p><code>ex0301.rb</code> に、 <a href="#ex0301_rb">リスト 1</a> を入力する（日本語コードがUTF-8なのを確認する）。</p>
+</li>
+<li>
+<p>ファイルを保存する。</p>
+</li>
+</ol>
+</div>
+<div id="ex0301_rb" class="exampleblock">
+<div class="title">リスト 1. 【Ruby】 <code>ex0301.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts 'ようこそ' <i class="conum" data-value="1"></i><b>(1)</b>
+puts 'Welcome'
+puts "私の好物は'りんご'です。"
+puts '私は"ドリアン"が苦手です。'</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>puts</code> メソッドは、あらかじめRubyに組み込まれている文字列を表示するメソッド。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>入力できていれば、 <a href="#ex0301_rb_w">リスト 2</a> には、入力したファイルの内容が反映されているはずです（つまり、このまま提出できるというわけです）。</p>
+</div>
+<div id="ex0301_rb_w" class="exampleblock">
+<div class="title">リスト 2. 【Ruby】 みなさんが作成した <code>ex0301.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts 'ようこそ'
+
+# ここにコードと追加する</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、プログラムを実行してみましょう。
+先に手順を書いておきます。実際にやってみた例は <a href="#ex0301_rb_exec">リスト 3</a> に示します。</p>
+</div>
+<div class="olist arabic">
+<div class="title"><code>ex0301.rb</code> を実行する</div>
+<ol class="arabic">
+<li>
+<p>コマンドプロンプトを起動する。</p>
+</li>
+<li>
+<p>この演習用リポジトリの中の <code>codes</code> ディレクトリへ移動する。</p>
+</li>
+<li>
+<p>コマンドラインからプログラムを実行する。</p>
+</li>
+<li>
+<p>表示を確認する。</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">Visual Studio Code を使っている人へのヒント</div>
+<div class="paragraph">
+<p>メニューの「Terminal＞New Terminal」でエディタの中にターミナルを開けば、そこでプログラムを動かせます。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+みなさんの演習用リポジトリの名前やcloneした場所は各自で異なるので、 <a href="#ex0301_rb_exec">リスト 3</a> では <code>ruby_basics</code> がそのリポジトリだと思って読み替えてください。
+</td>
+</tr>
+</table>
+</div>
+<div id="ex0301_rb_exec" class="exampleblock">
+<div class="title">リスト 3. 【Console】 <code>ex0301.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki&gt; cd ruby_basics <i class="conum" data-value="1"></i><b>(1)</b>
+C:\Users\kuboaki\ruby_basics&gt; cd codes <i class="conum" data-value="2"></i><b>(2)</b>
+C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0301.rb <i class="conum" data-value="3"></i><b>(3)</b>
+ようこそ
+Welcome
+私の好物は'りんご'です。
+私は"ドリアン"が苦手です。</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>演習用リポジトリをcloneした場所（<strong>ディレクトリ名は各自で異なるはずなので注意</strong>）に移動した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>cloneした場所の中の <code>codes</code> ディレクトリに移動した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>プログラムを実行した。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>どうでしょう、みなさんにとって最初のプログラムですが、うまく動いたでしょうか。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0301_rb_exec_w">リスト 4</a> の部分にペーストします。</p>
+</div>
+<div id="ex0301_rb_exec_w" class="exampleblock">
+<div class="title">リスト 4. 【Console】みなさんの <code>ex0301.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Rubyでは、文字列は文字の並びをダブルクォート（ <code>"</code> ）またはシングルクォート（ <code>'</code> ）で両端を囲んで表します。
+<a href="#ex0301_rb">リスト 1</a> の登場した <code>'Welcome'</code> とか <code>'ようこそ'</code> のように、プログラムの中に直接記述した文字列のことを「文字列リテラル」といいます。</p>
+</div>
+<div id="double_quoted_string_ex" class="exampleblock">
+<div class="title">リスト 5. 【Ruby】 ダブルクォートで囲まれた文字列リテラルの例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">"Ruby Programming"
+"ここが文字列"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="single_quoted_string_ex" class="exampleblock">
+<div class="title">リスト 6. 【Ruby】 シングルクォートで囲まれた文字列リテラルの例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">'Ruby Programming'
+'ここが文字列'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>練習1のプログラムを実行したとき、プログラムとして書いたときに文字列の両端にあったダブルクォートやシングルクォートは表示されませんでしたね。
+両端のクォート文字は、文字列の一部ではなく、文字列の開始と終了を表す「囲み」だからです。</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="title">囲む文字による文字列の違い</div>
+<div class="paragraph">
+<p>実は、ダブルクォートで囲まれた文字列とシングルクォートで囲まれた文字列は全く同じというわけではありません。
+ダブルクォートで囲まれた文字列では、シングルクォートは文字列の区切り文字ではなく通常の文字として扱われます。
+一方、シングルクォートで囲まれた文字列ではダブルクォートは文字列の区切り文字ではなく通常の文字として扱われます。
+また、ダブルクォートで囲まれた文字列の中では、エスケープシーケンスの記法を使って改行やタブといった制御文字を指定したり、変数の値を埋め込んだりできるようになっています。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>プログラム中に新しい文字列を記述すると、見かけが同じ文字列であったとしても、そのたびに別の文字列として扱われます。つまり、メモリ上の別の領域に新しい文字列として作成されます。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習新しい文字列を作る2newメソッドを使う">【演習】新しい文字列を作る（2）（newメソッドを使う）</h4>
+<div class="paragraph">
+<p>文字列を作成する別の方法は、 <code>String</code> クラスの <code>new</code> メソッド使う方法です（ <a href="#string_new_ex">リスト 7</a> ）。
+「 <code>String</code> クラスの <code>new</code> メソッドを呼ぶ」とか「 <code>String</code> を <code>new</code> する」といった言い方をします。</p>
+</div>
+<div id="string_new_ex" class="exampleblock">
+<div class="title">リスト 7. 【Ruby】新しい文字列を作るのに <code>String</code> クラスの <code>new</code> メソッドを使う</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">String.new("ここが文字列")
+String.new('ここも文字列')</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>では、 <a href="#ex0301_rb">リスト 1</a> と同じ文字列を、今度は <code>String</code> クラスの <code>new</code> メソッドを使って作ってみましょう（ <a href="#ex0302_rb">リスト 8</a> ）。</p>
+</div>
+<div id="ex0302_rb" class="exampleblock">
+<div class="title">リスト 8. 【Ruby】 <code>ex0302.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts String.new('ようこそ') <i class="conum" data-value="1"></i><b>(1)</b>
+puts String.new('Welcome')
+puts String.new("'私の好物は'りんご'です。")
+puts String.new('私は"ドリアン"が苦手です。')</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>puts</code> メソッドは、あらかじめRubyに組み込まれている文字列を表示するメソッド。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <a href="#ex0301_rb_w">リスト 2</a> のときと同じように、この演習用リポジトリの中の <code>codes</code> ディレクトリにあるファイル <code>ex0302.rb</code> を開いて編集します（ <a href="#ex0302_rb_w">リスト 9</a> ）。</p>
+</div>
+<div class="paragraph">
+<p><a href="#ex0302_rb">リスト 8</a> のプログラムを見てみましょう。
+最初に <code>String.new('ようこそ')`とあります。
+これは `String</code> クラスの <code>new</code> メソッドを呼び出すことを意味しています。
+メソッド名のうしろにカッコで囲んで作成する文字列が書いてあります。
+この記法の意味は、 <code>new</code> メソッドにデータとして <code>'ようこそ'</code> という文字列を渡すということです。
+このとき、メソッドに渡すデータのことを引数（ひきすう）またはパラメータといいます。</p>
+</div>
+<div id="ex0302_rb_w" class="exampleblock">
+<div class="title">リスト 9. 【Ruby】みなさんが入力した <code>ex0302.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts String.new('ようこそ')
+
+# ここにコードと追加する</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0302_rb_exec" class="exampleblock">
+<div class="title">リスト 10. 【Console】 <code>ex0302.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0302.rb <i class="conum" data-value="1"></i><b>(1)</b>
+ようこそ
+Welcome
+私の好物は'りんご'です。
+私は"ドリアン"が苦手です。</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>演習用リポジトリをcloneした場所の <code>codes</code> ディレクトリでプログラムを実行した。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#ex0302_rb_w">リスト 9</a> の実行結果は <a href="#ex0301_rb_exec">リスト 3</a> と同じになったはずですが、みなさんはどうだったでしょうか。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0302_rb_exec_w">リスト 11</a> に書き込みます。</p>
+</div>
+<div id="ex0302_rb_exec_w" class="exampleblock">
+<div class="title">リスト 11. 【Console】みなさんの <code>ex0302.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>new</code> メソッドだけでなく、Rubyのどのメソッドも、処理に必要な指示や情報を引数を使って渡せます。
+メソッドへ渡すデータは1つとは限りません。
+複数の引数をメソッドに渡すときは、カンマ（ <code>,</code> ）で区切って並べます。</p>
+</div>
+<div class="paragraph">
+<p><code>String</code> クラスが <code>new</code> メソッドを呼び出す様子を図にすると、 <a href="#string_new_message_passing">図 6</a> のようになります。
+メッセージを受け取っているレシーバは <code>String</code> クラス、メッセージは <code>new</code> です。
+そして、ここでのメッセージの送り手（センダー）は、みなさんのプログラムです。</p>
+</div>
+<div id="string_new_message_passing" class="imageblock">
+<div class="content">
+<img src="images/210424-0003.jpg" alt="210424 0003" width="75%">
+</div>
+<div class="title">図 6. <code>String</code> クラスがメッセージ <code>new</code> を受け取る様子</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_引数を囲むカッコは省略できる">引数を囲むカッコは省略できる</h4>
+<div class="paragraph">
+<p>メソッドの戻り値を使わないのであれば、引数を指定するときにカッコを省略して、 <a href="#omit_parentheses_ex">リスト 12</a> のように書くこともできます。</p>
+</div>
+<div id="omit_parentheses_ex" class="exampleblock">
+<div class="title">リスト 12. 【Ruby】かっこを省略した引数の書き方</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">String.new "ここが文字列"
+String.new 'ここも文字列'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>カッコを使う書き方と使わない書き方のどちらを使ってもかまわないでしょう。
+他の人のプログラムを読むときには、両方の書き方があったことを思い出してください。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_文字列リテラルとnewメソッドどちらを使うのか">文字列リテラルとnewメソッド、どちらを使うのか？</h4>
+<div class="paragraph">
+<p>文字列の作り方を2通り説明しました。
+なぜ書き方が2通りあるのでしょう。それは使うときの事情が異なるからです。
+先に説明した文字列リテラルは、プログラムを書いた時点であらかじめどんな文字列を使うのかが決まっているときに便利な方法です。
+それに対して、Stringクラスのnewメソッドを使った書き方は、プログラムを実行している途中で作成したい文字列がどんなものになるかが決まるような場合に便利な方法といえるでしょう。
+どちらかだけを使うというのではなく、状況に応じて都合のよい書き方を選んで使うというわけです。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_文字列に名前をつける変数名">2.2. 文字列に名前をつける（変数名）</h3>
+<div class="paragraph">
+<p><a href="#ex0301_rb">リスト 1</a> 、 <a href="#ex0302_rb">リスト 8</a> では文字列を作成しました。
+文字列を作成すると、コンピュータのメモリ空間のどこかに作成した文字列が格納されているわけです。
+しかし、<a href="#ex0301_rb">リスト 1</a> 、 <a href="#ex0302_rb">リスト 8</a> のプログラムでは、一度作ってしまった文字列は、その後もう一度使いたくても参照する方法がありません。
+同じ文字列を使いたくても、別に新しく文字列を作る必要があります。</p>
+</div>
+<div class="paragraph">
+<p>このことは、文字列ならさほど困らないように思えるかもしれませんが、数値の計算結果だった場合はどうでしょうか。
+<a href="#variable_less_computing">図 7</a> の左のように、途中までの計算結果をそのあとの計算で使うときに、もう1回そこまでの計算をやり直していては、プログラムはなかなか問題を解くことができないでしょう。
+それよりも、右のように途中までの計算結果を使いながら計算した方が便利ですよね。</p>
+</div>
+<div id="variable_less_computing" class="imageblock">
+<div class="content">
+<img src="images/210425-0001.jpg" alt="210425 0001" width="50%">
+</div>
+<div class="title">図 7. 計算結果を保存できず何度も計算する様子</div>
+</div>
+<div class="paragraph">
+<p>そこで、作成した文字列に「名前」をつけるという方法で、あとから参照できるようにします。
+Rubyでは、作成した文字列につける名前のことを「変数名」といいます。
+Rubyには、変数のつけ方にルールがありますが、いまのところは、小文字またはアンダースコア「_」で始まる名前をつけておきましょう（ローカル変数という種類の変数になります）。</p>
+</div>
+<div class="sect3">
+<h4 id="_演習文字列に名前をつける変数名を使う">【演習】文字列に名前をつける（変数名を使う）</h4>
+<div class="paragraph">
+<p>文字列に変数で名前をつけ、それを参照するプログラムを作って動かしてみましょう（ <a href="#ex0303_rb">リスト 13</a> ）。</p>
+</div>
+<div id="ex0303_rb" class="exampleblock">
+<div class="title">リスト 13. 【Ruby】 <code>ex0303.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+str1 = "ここが文字列" <i class="conum" data-value="1"></i><b>(1)</b>
+str2 = 'ここも文字列' <i class="conum" data-value="2"></i><b>(2)</b>
+str3 = str1 <i class="conum" data-value="3"></i><b>(3)</b>
+
+puts str1 <i class="conum" data-value="4"></i><b>(4)</b>
+puts str2
+puts str3</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>str1</code> という変数名でこの文字列を参照できるようになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>str2</code> という変数名でこの文字列を参照できるようになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>str3</code> は、<code>str1と</code> 同じ文字列を参照できるようになる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>作った文字列を変数名で参照して表示する。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <a href="#ex0302_rb_w">リスト 9</a> のときと同じように、この演習用リポジトリの中の <code>codes</code> ディレクトリにあるファイル <code>ex0303.rb</code> を開いて編集します（ <a href="#ex0303_rb_w">リスト 14</a> ）。</p>
+</div>
+<div id="ex0303_rb_w" class="exampleblock">
+<div class="title">リスト 14. 【Ruby】みなさんが入力した <code>ex0303.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+str1 = "ここが文字列"
+
+
+
+puts str1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0303_rb_exec" class="exampleblock">
+<div class="title">リスト 15. 【Console】 <code>ex0303.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0303.rb
+ここが文字列
+ここも文字列
+ここが文字列</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><code>str3</code> が <code>str1</code> と同じ文字列を表示していることに注意して実行結果を見てください。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0303_rb_exec_w">リスト 16</a> に書き込みます。</p>
+</div>
+<div id="ex0303_rb_exec_w" class="exampleblock">
+<div class="title">リスト 16. 【Console】みなさんの <code>ex0303.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="#ex0303_rb_exec">リスト 15</a> は <a href="#str_with_variable_name">図 8</a> 図のような名前付けをしていることになります。</p>
+</div>
+<div id="str_with_variable_name" class="imageblock">
+<div class="content">
+<img src="images/210425-0002.jpg" alt="210425 0002" width="75%">
+</div>
+<div class="title">図 8. 文字列に変数名をつけた様子</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_文字列を表示するprintメソッド">2.3. 文字列を表示する（printメソッド）</h3>
+<div class="paragraph">
+<p>さて、ここまで文字列を表示する方法として、おまじないのように <code>puts</code> メソッドを使っていました。
+文字列の表示によく使うもう一つのがメソッドが、 <code>print</code> メソッドです。</p>
+</div>
+<div id="print_sample01_rb" class="exampleblock">
+<div class="title">リスト 17. 【Ruby】 <code>print</code> メソッドを使って文字列を表示する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">print "ここが文字列" <i class="conum" data-value="1"></i><b>(1)</b>
+print 'ここも文字列'
+
+str1 =  "ここが文字列" <i class="conum" data-value="2"></i><b>(2)</b>
+print str1</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>print</code> メソッドで文字列を表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>変数を使った例。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><code>puts</code> メソッドのときもそうでしたが、 <code>print</code> メソッドを使うときには、 <code>String</code> クラスの <code>new</code> メソッドのようにクラスを指定して書いていません。
+Rubyには、プログラムを書くときによく使うメソッドについては特別にクラスの指定なく使えるようにしてあります。
+このようなメソッドを「組み込みメソッド」と呼んでいます。
+他にも組み込みメソッドがたくさん用意してあり、他のプログラミング言語の組み込み関数のように使えます。</p>
+</div>
+<div class="sect3">
+<h4 id="_演習print_メソッドを使って文字列を表示する">【演習】print メソッドを使って文字列を表示する</h4>
+<div class="paragraph">
+<p><code>print</code> メソッドを使って文字列を表示するプログラムを動かしてみましょう（ <a href="#ex0304_rb">リスト 18</a> ）。</p>
+</div>
+<div id="ex0304_rb" class="exampleblock">
+<div class="title">リスト 18. 【Ruby】 <code>ex0304.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+print "ようこそ" <i class="conum" data-value="1"></i><b>(1)</b>
+print 'Welcome'
+
+str1 = 'ここも文字列'
+print str1 <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>print</code> メソッドを使って文字列を表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>print</code> メソッドを使って変数に割り当てた文字列を表示した。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0304.rb</code> を開いて編集します（ <a href="#ex0304_rb_w">リスト 19</a> ）。</p>
+</div>
+<div id="ex0304_rb_w" class="exampleblock">
+<div class="title">リスト 19. 【Ruby】みなさんが入力した <code>ex0304.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+print "ようこそ"
+
+# 他の部分を書き足します</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0304_rb_exec" class="exampleblock">
+<div class="title">リスト 20. 【Console】 <code>ex0304.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0304.rb <i class="conum" data-value="1"></i><b>(1)</b>
+ようこそWelcomeここも文字列</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>出力がちょっと変わっていることに注意してください。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0304_rb_exec_w">リスト 21</a> に書き込みます。</p>
+</div>
+<div id="ex0304_rb_exec_w" class="exampleblock">
+<div class="title">リスト 21. 【Console】みなさんの <code>ex0304.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>うーん、これはどうでしょう。たしかに作成した文字列を表示することはできましたが、表示した2つの文字列はつながって表示されてしまいますね。
+できれば1つ表示したら改行して2行に分けて表示したいものです。</p>
+</div>
+<div class="paragraph">
+<p>改行という処理にやってほしいことは、なにか目に見える文字を表示することではありません。
+ある文字以降の表示の開始位置を、次行の先頭に変えることです。
+このことを実現するために、ディスプレイなどの表示装置は「表示するときには目に見えない制御コード」をプログラムから送ってもらうという方法で表示位置を制御しています。
+プログラムを書くときに目に見えないコードでは扱いにくくて不便です。
+そこで、多くのプログラミング言語が、この指示を表現するために特別な記法を用意して、制御文字などと呼んでいます。
+Rubyの場合、改行の制御文字は <code>\n</code> （バックスラッシュは日本語のフォントでは円記号になります）という書き方で表します。
+「n」にはnewline（行替え）の意味が込められています。</p>
+</div>
+<div class="paragraph">
+<p>では、改行するようにプログラムを直してみましょう（ <a href="#ex0305_rb">リスト 22</a> ）。</p>
+</div>
+<div id="ex0305_rb" class="exampleblock">
+<div class="title">リスト 22. 【Ruby】 <code>ex0305.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+print "ようこそ\n" <i class="conum" data-value="1"></i><b>(1)</b>
+print 'Welcome\n' <i class="conum" data-value="2"></i><b>(2)</b>
+
+str1 = "ここも文字列"
+print str1 + "\n" <i class="conum" data-value="3"></i><b>(3)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>ダブルクオート文字列に <code>\n</code> を追加した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>シングルクオート文字列に <code>\n</code> を追加した（改行として扱わないはず）。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>+</code> 演算子を使って、変数で参照した文字列と <code>\n</code> を結合して新しい文字列を作って表示した。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0305.rb</code> を開いて編集します（ <a href="#ex0305_rb_w">リスト 23</a> ）。</p>
+</div>
+<div id="ex0305_rb_w" class="exampleblock">
+<div class="title">リスト 23. 【Ruby】みなさんが入力した <code>ex0305.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+print "ようこそ\n"
+
+# 他の部分を書き足します</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0305_rb_exec" class="exampleblock">
+<div class="title">リスト 24. 【Console】 <code>ex0305.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0305.rb
+ようこそ
+Welcome\nここも文字列</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>出力が変わっていることに注意してください。</p>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0305_rb_exec_w">リスト 25</a> に書き込みます。</p>
+</div>
+<div id="ex0305_rb_exec_w" class="exampleblock">
+<div class="title">リスト 25. 【Console】みなさんの <code>ex0305.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>はい、こんどは改行されて表示されました。</p>
+</div>
+<div class="paragraph">
+<p>でも、2行目の文字列の後には「\n」がそのまま表示されています。今度はなにが起きているのでしょうか。
+これまで、文字列はダブルクォートかシングルクォートで囲った文字の並びとしていましたが、これらは完全に同じではないのです。
+実は <code>\n</code> のような制御文字は、ダブルクォートで囲った文字列の中では制御文字として扱われます。
+一方で、シングルクォートで囲った文字列の中では制御文字として解釈されず、表記したままの文字として扱うことになっています。</p>
+</div>
+<div class="paragraph">
+<p>ダブルクォートで囲まれた文字列では、「バックスラッシュ記法（改行のような目に見えない制御文字を表す記法）」と「式展開（変数の値を文字越に埋め込む記法）」が有効になります。
+シングルクォートで囲まれた文字列では、バックスラッシュそのものを表す「\\」とシングルクォートを表す「\'」以外は、特別な解釈はされず、その文字のまま扱われます。</p>
+</div>
+<div class="paragraph">
+<p>これからは、バックスラッシュ記法が必要かなど文字列の内容を考えて、ダブルクォートで囲むかシングルクォートで囲むかを使い分けていくとよいでしょう。
+なお、クォートには、ダブルクォートとシングルクォート以外にもっと一般化した「%記法」もありますが、ここでは説明を省略します。</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【コラム】組み込みメソッド</div>
+<div class="paragraph">
+<p>Rubyは、本文で紹介したprintメソッドの他にも、たくさんの組み込みメソッドを提供しています。よく使うものを紹介しておきましょう。</p>
+</div>
+<table id="embedded_methods" class="tableblock frame-all grid-all fit-content">
+<caption class="title">表 1. よく使う組み込みメソッド</caption>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">メソッド名</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">機能内容</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>chop</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">最後に読み込んだ文字列($_)の最後の文字を取り除いた文字列を生成して返す</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>chomp(rs = $/)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字列の末尾から <code>rs</code> で指定する改行コードを取り除いた文字列を生成して返す</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>eval(str)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">strをRubyのコードとして解釈し、実行する</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exec(str)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">strを自分のプロセスと置き換えて実行する</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit([result])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">プログラムの終了。 <code>result</code> を終了コードとする（省略値は0）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gets([rs])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コマンドライン引数のファイルまたは標準入力からrsを行末文字として1行読む</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>readline([rs])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gets</code> と同じだが <code>EOF</code> で例外 <code>EOFError</code> を発生させる</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>readlines([rs])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">引数ファイルの内容を文字列の配列として一気に読み込む</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sub(x,[y])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>$_</code> 中の先頭の <code>x</code> を <code>y</code> で置換する。 <code>y</code> 省略時はブロックの評価値で置換する</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gsub(x,[y])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">$_中のxをyですべて置換する。y省略時はブロックの評価値で置換する</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>open(path[,mode])</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mode</code> をモードとして（省略時は"r"） <code>path</code> のファイルをオープンする</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sprintf(&#8230;&#8203;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">C言語の <code>sprintf</code> とほぼ同じ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>raise(&#8230;&#8203;)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">例外を起こす</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sleep(sec)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sec</code> 秒だけプログラムの実行を停止。<code>sec</code> が省略された場合は永遠に停止</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>p(obj)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">オブジェクトの表示（デバッグに使う）</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><code>[ ]</code> で囲まれている引数は省略できることを意味します。</p>
+</div>
+<div class="paragraph">
+<p><code>chop</code>、<code>chomp</code>、<code>gsub</code>、<code>sub</code> メソッドは、処理した結果の新しい文字列を返しますが、元の文字列を変更して同じ処理をする <code>chop!</code>、<code>chomp!</code>、<code>gsub!</code>、<code>sub!</code> メソッドもあります。</p>
+</div>
+</div>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【コラム】バックスラッシュ記法</div>
+<div class="paragraph">
+<p>ダブルクォートで囲った文字列では、改行（ '\n' ）のほかの制御文字も使えます。
+これらの記法を「バックスラッシュ記法」といいます。
+バックスラッシュ記法と呼ばれるのは、制御文字の始まりがバックスラッシュ「\」（スラッシュと逆向きの斜め線の記号）から始まるからです。
+ただし、多くのみなさんが使っている日本語の環境では、バックスラッシュの代わりに「円記号」が表示されると思いますので、日本語環境ではバックスラッシュは円記号で代替されていると考えてください。
+バックスラッシュ記法を使うと、制御文字のほか、8進数や16進数の表記、クォートを文字列に含む方法などを表現できるようになります。</p>
+</div>
+<table id="backslash_notation" class="tableblock frame-all grid-all fit-content">
+<caption class="title">表 2. バックスラッシュ記法</caption>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">制御文字等</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">意味</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\t</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">タブ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\n</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">改行</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\r</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">復帰（キャリッジリターン）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\f</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">改ページ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\b</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">バックスペース</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\a</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ベル</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\e</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">エスケープ</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\s</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">空白</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\nnn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8 進数表記</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\xnn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16 進数表記</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\cx</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コントロール文字（x は ASCII 文字）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\C-x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">コントロール文字（x は ASCII 文字）</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>\x</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">文字 x そのもの</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>その昔、改行はタイプライターの紙を1行分送ること（LF：Line Feed）を意味し、復帰（CR：Carriage Return）は印字位置を行頭に移動することを意味していました。
+初期のコンピュータの端末はタイプライターそのものといってもよい機器でしたので、復帰や改行の制御用にコードが割り当てられていたわけです。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_数値と四則演算を使おうnumeric_クラス">2.4. 数値と四則演算を使おう（Numeric クラス）</h3>
+<div class="paragraph">
+<p>価格やページ数などに使う数値と四則演算の方法を覚えましょう。
+Rubyで数値を扱うクラスは、 <code>Numeric</code> クラスとその仲間です。
+仲間のクラスには、整数を扱う <code>Integer</code> クラスと浮動小数点数を扱う <code>Float</code> クラスがあります。</p>
+</div>
+<div class="sect3">
+<h4 id="_新しい数値を作る数値リテラルを使う">新しい数値を作る（数値リテラルを使う）</h4>
+<div class="paragraph">
+<p><code>1200</code> とか `3.14`のような数を示すデータが「数値」です。
+Rubyでは、数値は数字や小数点の並びで表します。
+プログラム中に次のように数値を記述すると、そのたびに新しい数値を作成することになります。
+このようにプログラムの中に直接記述できる数値列のことを「数値リテラル」といいます。</p>
+</div>
+<div id="integer_sample01_rb" class="exampleblock">
+<div class="title">リスト 26. 【Ruby】 数値リテラルの例（整数）</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">541              <i class="conum" data-value="1"></i><b>(1)</b>
+145              <i class="conum" data-value="2"></i><b>(2)</b>
+0b10010001       <i class="conum" data-value="3"></i><b>(3)</b>
+0221             <i class="conum" data-value="4"></i><b>(4)</b>
+0x91             <i class="conum" data-value="5"></i><b>(5)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>100番目の素数。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>10進数。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>145の2進数表現。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>145の8進数表現。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>145の16進数表現。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>浮動小数点数や指数表現も扱えます。</p>
+</div>
+<div id="float_sample01_rb" class="exampleblock">
+<div class="title">リスト 27. 【Ruby】 数値リテラルの例（浮動小数点数）</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">2.7182818284     <i class="conum" data-value="1"></i><b>(1)</b>
+1.9891e30        <i class="conum" data-value="2"></i><b>(2)</b>
+e = 2.7182818284 <i class="conum" data-value="3"></i><b>(3)</b>
+prime100 = 541   <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>自然対数の底。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>太陽の質量（kg）1.9891の10の30乗を表している。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>自然対数の底の値に <code>e</code> という名前をつけた。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>100番目の素数に <code>prime100</code> という名前をつけた。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_四則演算">四則演算</h4>
+<div class="paragraph">
+<p>数値では、四則演算、剰余、べき乗の計算ができます。
+演算する数が整数か浮動小数点数かで、それぞれの演算も数値の型に合ったの演算になります。
+剰余は除算の余りを求める演算で、べき乗は左辺の数を右辺の回数だけ掛けた数を求める演算です。変数を使うこともできます</p>
+</div>
+<table id="numarical_operation_list" class="tableblock frame-all grid-all fit-content">
+<caption class="title">表 3. 四則演算、剰余、べき乗の演算子</caption>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">演算</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">演算子</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">加算</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">減算</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">乗算</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">除算</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">剰余</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>**</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">べき乗</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_演習数値や計算結果を表示する1_四則演算">【演習】数値や計算結果を表示する(1) （四則演算）</h4>
+<div class="paragraph">
+<p>四則演算を試すプログラムを作って動かしてみましょう（ <a href="#ex0306_rb">リスト 28</a> ）。</p>
+</div>
+<div id="ex0306_rb" class="exampleblock">
+<div class="title">リスト 28. 【Ruby】 <code>ex0306.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts 32 + 24.1
+puts 8.2 - 20
+puts 6 * 10.0
+puts 2.5 / 3
+puts 9 % 2
+e = 2.7182818284
+print 'e=', e, "\n"
+print 'eの2倍は', 2 * e, "です。\n"
+prime100 = 541
+print '100番目の素数は', prime100, "です。\n"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0306.rb</code> を開いて編集します（ <a href="#ex0306_rb_w">リスト 29</a> ）。</p>
+</div>
+<div id="ex0306_rb_w" class="exampleblock">
+<div class="title">リスト 29. 【Ruby】みなさんが入力した <code>ex0306.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+puts 32 + 24.1
+
+
+e = 2.7182818284</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0306_rb_exec" class="exampleblock">
+<div class="title">リスト 30. 【Console】 <code>ex0306.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0306.rb
+56.1
+-11.8
+60.0
+0.8333333333333334
+1
+e=2.7182818284
+eの2倍は5.4365636568です。
+100番目の素数は541です。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0306_rb_exec_w">リスト 31</a> に書き込みます。</p>
+</div>
+<div id="ex0306_rb_exec_w" class="exampleblock">
+<div class="title">リスト 31. 【Console】みなさんの <code>ex0306.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>行の折返しが希望どおりできているか確認してください。</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習数値や計算結果を表示する2_printfメソッド">【演習】数値や計算結果を表示する(2) （printfメソッド）</h4>
+<div class="paragraph">
+<p>C言語には、数値や文字列を書式に従って文字列に変換してくれるprintfという関数があり、よく利用されています。
+Rubyの組み込みメソッドにもこの関数と同様の <code>printf</code> メソッドが用意されています。
+このメソッドは、第1引数に出力する文字列の書式を指定するための書式指定文字列を渡します。</p>
+</div>
+<div class="paragraph">
+<p><code>printf</code> メソッドを使うプログラムを作って動かしてみましょう（ <a href="#ex0307_rb">リスト 32</a> ）。</p>
+</div>
+<div id="ex0307_rb" class="exampleblock">
+<div class="title">リスト 32. 【Ruby】 <code>ex0307.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+printf "20 + 2 = %04d\n", 20 + 2
+printf "2 - 20 = %04d\n", 2 - 20
+printf "2.5 / 3 = %05f\n", 2.5 / 3
+printf "9 %% 2 = %d\n", 9 % 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0307.rb</code> を開いて編集します（ <a href="#ex0307_rb_w">リスト 33</a> ）。</p>
+</div>
+<div id="ex0307_rb_w" class="exampleblock">
+<div class="title">リスト 33. 【Ruby】みなさんが入力した <code>ex0307.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+printf "20 + 2 = %04d\n", 20 + 2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0307_rb_exec" class="exampleblock">
+<div class="title">リスト 34. 【Console】 <code>ex0307.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0307.rb
+20 + 2 = 0022
+2 - 20 = -018
+2.5 / 3 = 0.833333
+9 % 2 = 1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0307_rb_exec_w">リスト 35</a> に書き込みます。</p>
+</div>
+<div id="ex0307_rb_exec_w" class="exampleblock">
+<div class="title">リスト 35. 【Console】みなさんの <code>ex0307.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">【コラム】printfの書式指定</div>
+<div class="paragraph">
+<p>組み込みメソッドの <code>printf</code> メソッドや <code>sprintf</code> メソッドの書式化文字列の指定方法は、C言語のsprintf関数の書式の指定方法を元に作成されています。
+Rubyでは、この書式の指定方法を、元にしたC言語の関数の名前をとって「 <code>sprintf</code> フォーマット」と呼びます。</p>
+</div>
+<div class="paragraph">
+<p><code>sprintf</code> フォーマットの書式は <a href="#sprintf_format_outline">リスト 36</a> のような形式になっています。
+このうち <code>[</code> と <code>]</code> で囲まれた部分は、省略可能な要素を意味します。</p>
+</div>
+<div id="sprintf_format_outline" class="exampleblock">
+<div class="title">リスト 36. <code>sprintf</code> フォーマットの書式の形式</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">%[引数指定$][フラグ][幅][.精度]指示子</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>書式指定は <code>%</code> に続く記号の組み合わせによってできています。ここでは、基本的でよく使う書式だけ紹介しておきます。</p>
+</div>
+<div class="paragraph">
+<p>整数を出力するときの書式は <code>%d</code> です。
+桁数を指定する場合に <code>%04d</code> のように指定した桁数と上位桁に0を詰めて出力します。
+上位桁の0を省きたいとき（ゼロサプレスといいます）は、 `%4d`とします。</p>
+</div>
+<div class="paragraph">
+<p>文字列を出力するときの書式は <code>%s</code> です。桁数を指定したい場合には <code>%10s</code> などとします。</p>
+</div>
+<div class="paragraph">
+<p>小数形式の浮動小数点数を出力するときの書式は <code>%f</code> です。
+桁数を指定したい場合には `%4.5f`などとします。
+この例の場合、小数点以上の桁数が4桁、小数点以下の桁数が5桁の出力を意味します。</p>
+</div>
+<div class="paragraph">
+<p>指数を使った浮動小数点数を出力するときの書式は <code>%e</code> です。
+桁数を指定したい場合には <code>%10.5e</code> などとします。この例の場合、有効桁数が5桁という意味になります。</p>
+</div>
+<div class="paragraph">
+<p><code>sprintf</code> フォーマット」にはもっと多くの書式指定方法があります。
+詳しくは <a href="http://www.ruby-lang.org/ja/man/html/">Rubyリファレンスマニュアル</a> の付録にある「 <code>sprintf</code> フォーマット」を参照してください。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_メソッドの実行結果や数値を文字列に埋め込む式展開">2.5. メソッドの実行結果や数値を文字列に埋め込む（式展開）</h3>
+<div class="paragraph">
+<p>メソッドが処理した結果や数値をを文字列に整形して表示することはよく行われることです。
+そこで、Rubyには便利な方法としてダブルクォートで囲まれた文字列の中に「式展開」するという方法が用意されています。</p>
+</div>
+<div class="paragraph">
+<p>文字列の中に式展開を記述するには、 <a href="#Expression_expansion_format">リスト 37</a> のような書式を使います。</p>
+</div>
+<div id="Expression_expansion_format" class="exampleblock">
+<div class="title">リスト 37. 式展開の書式</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">"...ここに文字列....#{式}...ここに文字列..."</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習式展開を使って実行結果を表示する">【演習】式展開を使って実行結果を表示する</h4>
+<div class="paragraph">
+<p><a href="#ex0306_rb">リスト 28</a> の後半は、式展開を使って書き直せます。
+式展開を使って書き直したプログラムを動かしてみましょう（ <a href="#ex0308_rb">リスト 38</a> ）。</p>
+</div>
+<div id="ex0308_rb" class="exampleblock">
+<div class="title">リスト 38. 【Ruby】 <code>ex0308.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+e = 2.7182818284
+print "e= #{ e }\n"
+print "eの2倍は、#{ 2 * e } です。\n"
+prime100 = 541
+print "100番目の素数は#{prime100}です。\n"</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0308.rb</code> を開いて編集します（ <a href="#ex0308_rb_w">リスト 39</a> ）。</p>
+</div>
+<div id="ex0308_rb_w" class="exampleblock">
+<div class="title">リスト 39. 【Ruby】みなさんが入力した <code>ex0308.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+e = 2.7182818284
+
+
+prime100 = 541</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0308_rb_exec" class="exampleblock">
+<div class="title">リスト 40. 【Console】 <code>ex0308.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0308.rb
+e= 2.7182818284
+eの2倍は、5.4365636568 です。
+100番目の素数は541です。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0308_rb_exec_w">リスト 41</a> に書き込みます。</p>
+</div>
+<div id="ex0308_rb_exec_w" class="exampleblock">
+<div class="title">リスト 41. 【Console】みなさんの <code>ex0308.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>式展開が希望どおりできているか確認してください。</p>
+</div>
+<div class="paragraph">
+<p><a href="#ex0308_rb">リスト 38</a> では、数値や計算の結果を式展開しましたが、式展開の式として使えるのは数値や計算式だけではありません。配列や変数の指定、メソッドの呼び出しなども式展開の式に指定できます。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_日付操作を使おうdate_クラス">2.6. 日付操作を使おう（Date クラス）</h3>
+<div class="paragraph">
+<p>発行日や購入日といった日付の使い方を覚えましょう。
+Rubyで日付を扱うときには <code>Date`クラスを使います。
+仲間のクラスに、時刻を表す `Time</code> クラスや、日付と時間も扱える <code>DateTime</code> クラスがあります。</p>
+</div>
+<div class="paragraph">
+<p><code>Date</code> クラスは組み込みクラスライブラリではないので、利用するときには &lt;&lt;&gt;&gt; のような「 `require`宣言」 が必要です。</p>
+</div>
+<div id="require_dec_sample" class="exampleblock">
+<div class="title">リスト 42. <code>Date</code> クラスを使うときの準備</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'date'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>日付は、 <code>2021-10-24</code> とか <code>12 Mar 2020</code> のように、ある時点の日付を示すための固有の表記を使います。</p>
+</div>
+<div id="date_sample01_rb" class="exampleblock">
+<div class="title">リスト 43. 【Ruby】 <code>Date</code> クラスを使う例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby">require 'date' <i class="conum" data-value="1"></i><b>(1)</b>
+
+day = Date.today <i class="conum" data-value="2"></i><b>(2)</b>
+puts day.to_s <i class="conum" data-value="3"></i><b>(3)</b>
+puts day      <i class="conum" data-value="4"></i><b>(4)</b>
+
+hinamatsuri2009 = Date.new( 2009, 3, 3 )  <i class="conum" data-value="5"></i><b>(5)</b>
+kodomo_no_hi2009 = Date.new( 2009, 5, 5 )
+puts hinamatsuri2009 <i class="conum" data-value="6"></i><b>(6)</b>
+puts kodomo_no_hi2009</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>Date</code> クラスを使うために <code>date</code> ライブラリを require した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>今日の日付を得る <code>Date</code> クラスの <code>today</code> メソッドを呼び出した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td><code>day</code> は日付オブジェクトなので、文字列に変換して表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>puts</code> は引数のオブジェクトの <code>to_s</code> メソッドを呼び出して文字列にしているので、 <code>to_s</code> メソッドを省略しても文字列が得られる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>ひな祭りの日付オブジェクトを作った。<code>Date</code> クラスの <code>new</code> メソッドは、引数として、年、月、日の数値をる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>ひな祭りの日付オブジェクトを表示した。日付オブジェクトの文字列を得るために <code>to_s</code> メソッドが使われている。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習書式を指定して日付を表示する">【演習】書式を指定して日付を表示する</h4>
+<div class="paragraph">
+<p><code>Date</code> クラスを使って日付を扱うプログラムを作って動かしてみましょう（ <a href="#ex0309_rb">リスト 44</a> ）。
+表示する書式を指定したい場合には、 <code>strftime</code> メソッドが使えます。</p>
+</div>
+<div id="ex0309_rb" class="exampleblock">
+<div class="title">リスト 44. 【Ruby】 <code>ex0309.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+require 'date' <i class="conum" data-value="1"></i><b>(1)</b>
+
+hinamatsuri2012 = Date.new(2012, 3, 3) <i class="conum" data-value="2"></i><b>(2)</b>
+puts hinamatsuri2012
+puts hinamatsuri2012.jisx0301 <i class="conum" data-value="3"></i><b>(3)</b>
+puts hinamatsuri2012.strftime('%Y年%m月%d日') <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><code>Date</code> クラスを使うために <code>date</code> ライブラリを require した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>Date</code> クラスの <code>new</code> メソッドを使って日付オブジェクトを作成した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>「JIS:X 0301」書式の文字列を表示した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><code>strftime</code> をメソッドを使って、書式を指定して表示した。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0309.rb</code> を開いて編集します（ <a href="#ex0309_rb_w">リスト 45</a> ）。</p>
+</div>
+<div id="ex0309_rb_w" class="exampleblock">
+<div class="title">リスト 45. 【Ruby】みなさんが入力した <code>ex0309.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+require 'date'
+
+hinamatsuri2012 = Date.new(2012, 3, 3)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0309_rb_exec" class="exampleblock">
+<div class="title">リスト 46. 【Console】 <code>ex0309.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0309.rb
+2012-03-03
+H24.03.03 <i class="conum" data-value="1"></i><b>(1)</b>
+2012年03月03日</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>「JIS:X 0301」書式を使ったので、元号の記号と和暦の年が使われている。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、v<a href="#ex0309_rb_exec_w">リスト 47</a> に書き込みます。</p>
+</div>
+<div id="ex0309_rb_exec_w" class="exampleblock">
+<div class="title">リスト 47. 【Console】みなさんの <code>ex0309.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>指定した書式で日付文字列を取得できているか確認してください。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_配列を使ってみようarray_クラス">2.7. 配列を使ってみよう（Array クラス）</h3>
+<div class="paragraph">
+<p>文字列や数値、日付は、それぞれが単独の値を持つデータでした。
+通常アプリケーションは複数のデータを扱うのですから、ひとつずつのデータをいちいち変数として並べていては、処理や管理が煩わしくなってしまいます。
+配列は、複数のデータをまとめて扱うときに使うデータ構造の1つで、同じようなデータが繰り返されているときに向いています。</p>
+</div>
+<div class="sect3">
+<h4 id="_arrayクラスの使い方">Arrayクラスの使い方</h4>
+<div class="paragraph">
+<p>Ruby <code>Array</code> クラスは、柔軟で使いやすいクラスです。</p>
+</div>
+<div id="array_samole_rb" class="exampleblock">
+<div class="title">リスト 48. 【Ruby】 <code>Array</code> クラスを使う例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+train_types = ['local', 'rapid', 'express'] <i class="conum" data-value="1"></i><b>(1)</b>
+exam_scores = [40, 35, 42, 37, 48] <i class="conum" data-value="2"></i><b>(2)</b>
+fruits_prices = [['apple', 200], ['orange', 100], ['melon', 600]] <i class="conum" data-value="3"></i><b>(3)</b>
+
+puts train_types[0]
+puts exam_scores[3]
+puts fruits_prices[1][1] <i class="conum" data-value="4"></i><b>(4)</b>
+puts fruits_prices[2][0]</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>初期化データによる文字列の配列。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>初期化データによる数値の配列。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>入れ子になった配列。Rubyの配列は、異なる型の要素を同じ配列に混在できる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>配列の要素の参照。要素番号は <code>0</code> からなので、 <code>[1][0]</code> は、 <code>orange</code> になる。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習配列を繰り返し処理するeachメソッド">【演習】配列を繰り返し処理する（eachメソッド）</h4>
+<div class="paragraph">
+<p>配列の要素を1つずつ繰り返し処理するには、 <code>Array</code> クラスの <code>each</code> メソッドを使います。
+<code>each</code> メソッドは、配列から要素を1つずつ取り出し、後に続くブロックで与えられたプログラムを実行します。
+このメソッドを使うと、要素ごとに表示するとか、すべての要素の値を足しこむといった処理ができます。</p>
+</div>
+<div class="paragraph">
+<p><code>Array</code> クラスの <code>each</code> メソッドを使ったプログラムを作って動かしてみましょう（ <a href="#ex0310_rb">リスト 49</a> ）。</p>
+</div>
+<div id="ex0310_rb" class="exampleblock">
+<div class="title">リスト 49. 【Ruby】 <code>ex0310.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+fruits_prices = [['apple', 200], ['orange', 100], ['melon', 600]]
+
+fruits_prices.each do |fp| <i class="conum" data-value="1"></i><b>(1)</b>
+  puts "名前：#{fp[0]}、値段：#{fp[1]}円"
+end
+
+sum = 0
+fruits_prices.each { |fp| sum += fp[1] } <i class="conum" data-value="2"></i><b>(2)</b>
+puts "1個ずつ買うと全部で#{sum}円です。"</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>配列の要素を1つずつ取り出すために、 <code>each</code> メソッドを使った。 <code>fruits_prices</code> は「配列の配列」なのに注意。取り出した1件分は <code>fp</code> という名前で参照している。これは <code>['apple', 200]</code> のような配列になる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td><code>fp[1]</code> は <code>['apple', 200]</code> のような配列なので、その（0から数えて）1番目の要素は <code>200</code> になる。それを変数 <code>sum</code> に足している。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0310.rb</code> を開いて編集します（ <a href="#ex0310_rb_w">リスト 50</a> ）。</p>
+</div>
+<div id="ex0310_rb_w" class="exampleblock">
+<div class="title">リスト 50. 【Ruby】みなさんが入力した <code>ex0310.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+fruits_prices = [['apple', 200], ['orange', 100], ['melon', 600]]
+
+
+
+sum = 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0310_rb_exec" class="exampleblock">
+<div class="title">リスト 51. 【Console】 <code>ex0310.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0310.rb
+名前：apple、値段：200円
+名前：orange、値段：100円
+名前：melon、値段：600円
+1個ずつ買うと全部で900円です。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0310_rb_exec_w">リスト 52</a> に書き込みます。</p>
+</div>
+<div id="ex0310_rb_exec_w" class="exampleblock">
+<div class="title">リスト 52. 【Console】みなさんの <code>ex0310.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>配列の要素を1件ずつ取り出して処理できていることを確認してください。</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ハッシュを使ってみようhash_クラス">2.8. ハッシュを使ってみよう（Hash クラス）</h3>
+<div class="paragraph">
+<p>たいていのアプリケーションでは、複数のデータをまとめて扱うための方法が必要です。
+まとめて扱う方法を提供するクラスのことを一般に「コレクションクラス」と呼びます。
+その1つが、配列（ <code>Array</code> クラス）でした。
+もう1つのよく使われているクラスが「ハッシュ（ <code>Hash</code> クラス）」です。ハッシュは「連想配列」とも呼ばれてます。</p>
+</div>
+<div class="sect3">
+<h4 id="_ハッシュの考え方">ハッシュの考え方</h4>
+<div class="paragraph">
+<p>配列は、要素を特定するために「何番目」という値を情報として使います。
+この要素を特定するための情報のことを「インデックス」や「添字」などと呼びます。
+ハッシュは、インデックスとして数値を使う代わりに、文字列やシンボルを使います。
+シンボルは、見かけは文字列とよく似ている、目に見えない固有の数値を持った定数です。</p>
+</div>
+<div class="paragraph">
+<p>配列が「0番目、1番目、…」と数えるところが、「 <code>apple</code> 番目、 <code>orange</code> 番目、…」となっているとイメージしてみるとよいでしょう（ <a href="#hash_index_image">図 9</a> ）。その代わり何番目かはわからなくなります。</p>
+</div>
+<div id="hash_index_image" class="imageblock">
+<div class="content">
+<img src="images/210426-0001.jpg" alt="210426 0001" width="50%">
+</div>
+<div class="title">図 9. ハッシュのインデックスのイメージ</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_hashクラスの使い方">Hashクラスの使い方</h4>
+<div class="paragraph">
+<p>Rubyのプログラムでは <code>Hash</code> クラスはとてもよく使われるクラスです。</p>
+</div>
+<div id="hash_samole_rb" class="exampleblock">
+<div class="title">リスト 53. 【Ruby】 <code>Hash</code> クラスを使う例</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+require 'date'
+
+students = {} <i class="conum" data-value="1"></i><b>(1)</b>
+friends = { 'shin' =&gt; 'Shin Kuboaki', 'shinichirou' =&gt; 'Shinichirou Ohba' } <i class="conum" data-value="2"></i><b>(2)</b>
+brothers = { :shin =&gt; 'Shin Kuboaki', :hiroshi =&gt; 'Hiroshi Kuboaki' } <i class="conum" data-value="3"></i><b>(3)</b>
+brothers2 = { shin: 'Shin Kuboaki', hiroshi: 'Hiroshi Kuboaki' } <i class="conum" data-value="4"></i><b>(4)</b>
+birthdays = { shin: Date.new(1963, 9, 12), hiroshi: Date.new(1967, 1, 18) } <i class="conum" data-value="5"></i><b>(5)</b>
+
+friends['noboru'] = 'Noboru Watanabe' <i class="conum" data-value="6"></i><b>(6)</b>
+
+friends.each do |key, val| <i class="conum" data-value="7"></i><b>(7)</b>
+  puts "キー: #{key}、値： #{val}"
+end
+
+if brothers.include?( :shin ) then <i class="conum" data-value="8"></i><b>(8)</b>
+  puts 'brothersには、キー :shin が含まれています。'
+else
+  puts 'brothersには、キー :shin が含まれていません。'
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>空のハッシュの定義。 <code>students = Hash.new</code> のようにも書ける。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>初期化データによるハッシュ。<code>&#8658;</code> の前がキー。この例はキーが文字列。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>初期化データによるハッシュ。キーがシンボル。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>初期化データによるハッシュ。キーがシンボルのときはこの記法も使える。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>日付オブジェクトを要素に持つハッシュ。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>既存のハッシュに要素を追加した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>ハッシュから順に要素を取り出す。取り出した要素はキーと値のペアなので、 <code>key</code> と <code>val</code> の2つの変数で参照している。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>ハッシュの中に指定のキーが含まれているか調べた。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_演習ハッシュを繰り返し処理するeachメソッド">【演習】ハッシュを繰り返し処理する（eachメソッド）</h4>
+<div class="paragraph">
+<p>ハッシュの要素を1つずつ繰り返し処理するには、 <code>Hash</code> クラスの <code>each</code> メソッド（あるいは <code>each_pair</code> メソッド）を使います。
+<code>each</code> メソッドは、ハッシュから要素（キー値のペア）を1つずつ取り出し、後に続くブロックで与えられたプログラムを実行します。
+このメソッドを使うと、要素ごとに表示するとか、すべての要素の値を足しこむといった処理ができます。</p>
+</div>
+<div class="paragraph">
+<p><code>Hash</code> クラスの <code>each</code> メソッドを使ったプログラムを作って動かしてみましょう（ <a href="#ex0311_rb">リスト 54</a> ）。</p>
+</div>
+<div id="ex0311_rb" class="exampleblock">
+<div class="title">リスト 54. 【Ruby】 <code>ex0311.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+friends = { <i class="conum" data-value="1"></i><b>(1)</b>
+  shin: '久保秋 真',
+  kouya: '栃窪 孝也',
+  astushi: '今野 睦'
+}
+
+friends[:tatsuki] = '井上 樹' <i class="conum" data-value="2"></i><b>(2)</b>
+
+puts friends[:kouya]  <i class="conum" data-value="3"></i><b>(3)</b>
+
+friends.delete(:shin) <i class="conum" data-value="4"></i><b>(4)</b>
+
+friends.each do |key, value| <i class="conum" data-value="5"></i><b>(5)</b>
+  printf "キー：%-8s, 値：%s\n", key, value <i class="conum" data-value="6"></i><b>(6)</b>
+end</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>初期化データを使ってハッシュを作成した。キーがシンボルの場合の簡易な表記を使っている。もともとの記法では <code>:shin &#8658; '久保秋 真'</code> のような表記になる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>キーを指定してハッシュに要素を追加した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>キーを指定してハッシュから要素を取り出した。ハッシュは、キーで要素を一意に検索できる。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>キーを指定してハッシュから要素を削除した。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td><code>each</code> メソッドを使って、キーと値のセットを取り出す。</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td><code>printf</code> メソッドを使ってキーと値を表示した。 <code>%-8s</code> は、文字列を8桁幅に左寄せに配置する。  <code>%8s</code> なら右寄せになる。</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>みなさんは、 <code>codes</code> ディレクトリにあるファイル <code>ex0311.rb</code> を開いて編集します（ <a href="#ex0311_rb_w">リスト 55</a> ）。</p>
+</div>
+<div id="ex0311_rb_w" class="exampleblock">
+<div class="title">リスト 55. 【Ruby】みなさんが入力した <code>ex0311.rb</code></div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-ruby" data-lang="ruby"># frozen_string_literal: true
+
+friends = { 
+  shin: '久保秋 真',
+}
+
+
+
+friends.each do |key, value|
+
+end</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+作成できたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>では、実行してみましょう。</p>
+</div>
+<div id="ex0311_rb_exec" class="exampleblock">
+<div class="title">リスト 56. 【Console】 <code>ex0311.rb</code> を実行する</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">C:\Users\kuboaki\ruby_basics\codes&gt; ruby ex0311.rb
+栃窪 孝也
+キー：kouya   , 値：栃窪 孝也
+キー：astushi , 値：今野 睦
+キー：tatsuki , 値：井上 樹</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>コマンドプロンプトでみなさんが実行した結果は、テキストとしてコピーしてこの文書（ <code>README.adoc</code> ）自身を編集して、<a href="#ex0311_rb_exec_w">リスト 57</a> に書き込みます。</p>
+</div>
+<div id="ex0311_rb_exec_w" class="exampleblock">
+<div class="title">リスト 57. 【Console】みなさんの <code>ex0311.rb</code> の実行結果</div>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-console" data-lang="console">ここに、実行結果をテキストとしてコピーしてペーストする。</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ペーストできたら、一度コミットします。
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>ハッシュの要素を1件ずつ取り出して処理できていることを確認してください。</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_まとめ">3. まとめ</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>プログラミング言語Rubyの基本的な使い方について学び、いくつかプログラムを作って動かしてみました。
+また、オブジェクト指向の考え方やことばについても少し学びました。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-04-27 03:11:56 +0900
+</div>
+</div>
+</body>
+</html>
