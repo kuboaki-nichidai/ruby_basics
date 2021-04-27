@@ -452,7 +452,7 @@ Rubyには、変数のつけ方にルールがありますが、いまのとこ�
 
 文字列に変数で名前をつけ、それを参照するプログラムを作って動かしてみましょう（ <<ex0303_rb>> ）。
 
-sourcesdir: hints
+:sourcesdir: hints
 [[ex0303_rb]]
 .【Ruby】 `ex0303.rb`
 [example]
@@ -710,7 +710,7 @@ Rubyは、本文で紹介したprintメソッドの他にも、たくさんの�
 
 [[embedded_methods]]
 .よく使う組み込みメソッド
-[%autowidth,cols="20,80"]
+[%autowidth,cols="20,80",options="header"]
 |===
 | メソッド名 | 機能内容
 | `chop` | 最後に読み込んだ文字列($_)の最後の文字を取り除いた文字列を生成して返す
@@ -748,7 +748,7 @@ Rubyは、本文で紹介したprintメソッドの他にも、たくさんの�
 
 [[backslash_notation]]
 .バックスラッシュ記法
-[%autowidth,cols="20,80"]
+[%autowidth,cols="20,80",options="header"]
 |===
 | 制御文字等 | 意味
 | `\t` | タブ
@@ -831,7 +831,7 @@ prime100 = 541   # <4>
 
 [[numarical_operation_list]]
 .四則演算、剰余、べき乗の演算子
-[%autowidth,cols="20,80"]
+[%autowidth,cols="20,80",options="header"]
 |===
 | 演算 | 演算子
 | `+` | 加算

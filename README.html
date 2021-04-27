@@ -80,7 +80,7 @@
 <div class="paragraph">
 <p>Rubyは「まつもと ゆきひろ」さんが、手軽にオブジェクト指向でプログラミングするための言語として、個人で開発を始めたフリーソフトウェアのプログラミング言語です。
 現在では、世界中の非常にたくさんの人が利用している、よく知られた言語の1つとなっています。
-日本発のソフトウェアということもあって、書籍にもインターネット上にも日本語の情報がたくさんあります。</p>
+日本発のソフトウェアということもあって、書籍やインターネット上に日本語の情報がたくさんあります。</p>
 </div>
 </div>
 <div class="sect2">
@@ -110,7 +110,7 @@ Rubyはインタプリタ型のプログラミング言語の仲間です。</p>
 </div>
 <div class="paragraph">
 <p>オブジェクト指向の「オブジェクト」は、日本語でいえば「もの」です。
-Rubyの世界での「もの」は、私たちが日本語で「もの」と思うものとは少し違っていて、なんらかの操作をすることができる対象全般を意味しています。
+Rubyの世界での「もの」は、私たちが日本語で考える「もの」とは少し違っていて、なんらかの操作ができる対象全般を意味しています。
 つまり、操作すると何かしてくれそうなものは、具体的なものだけでなく概念的な存在でも、みんなオブジェクトとみなします。
 たとえば、数値や文字列、それらを組み合わせた複合的なデータ（伝票や住所録など）、ファイルやネットワーク、音声や画像、といったものもRubyの世界ではオブジェクトとして扱います。</p>
 </div>
@@ -148,8 +148,8 @@ Rubyの世界での「もの」は、私たちが日本語で「もの」と思�
 </div>
 <div class="paragraph">
 <p>では、 <a href="#message03">図 3</a> 次の図のように販売機がジュースの自動販売機であったらどうでしょうか。
-この販売機は「切符を販売する」というメッセージに応えて処理することができませんね。
-このようなとき、Rubyでは「メッセージを処理するメソッドが見つからない」という例外処理が発生することになっています。</p>
+この販売機は「切符を販売する」というメッセージに応えて処理したくても処理できませんね。
+このようなとき、Rubyでは「メッセージを処理するメソッドが見つからない」という例外処理を発生します。</p>
 </div>
 <div id="message03" class="imageblock">
 <div class="content">
@@ -161,7 +161,7 @@ Rubyの世界での「もの」は、私たちが日本語で「もの」と思�
 <div class="sect3">
 <h4 id="_オブジェクト指向プログラミング">オブジェクト指向プログラミング</h4>
 <div class="paragraph">
-<p><a href="#message01">図 1</a> から <a href="#message03">図 3</a> に登場したオブジェクトとメッセージの関係において、メッセージの送り手のオブジェクトを「センダー」、メッセージの受け取り手のオブジェクトを「レシーバ」と呼びます。
+<p><a href="#message01">図 1</a> から <a href="#message03">図 3</a> に登場する、メッセージの送り手のオブジェクトを「センダー」、メッセージの受け取り手のオブジェクトを「レシーバ」と呼びます。
  受け取ったメッセージに応答してレシーバが処理をしますが、この処理を「メソッド」と呼びます。
 一般には、メッセージ名と、レシーバがそのメッセージを受け取ったときに処理を実行するメソッドの名前は、一致するとは限りません。
 ですが、Rubyでは、メッセージ名をメソッド名に使ってプログラムを書くことが多いようです（ <a href="#sender_reciever_message">図 4</a> ）。</p>
@@ -186,7 +186,7 @@ Rubyの世界での「もの」は、私たちが日本語で「もの」と思�
 <div class="title">図 5. プログラムはメッセージの伝播で動く</div>
 </div>
 <div class="paragraph">
-<p>このように、オブジェクトがメッセージを伝播することによって処理が進んでいくプログラムを、オブジェクト指向プログラムといいます。
+<p>このように、オブジェクトがメッセージを伝播させることで処理が進んでいくプログラムを、オブジェクト指向プログラムといいます。
 そして、オブジェクト指向プログラムを作るプログラミング方法のことを、オブジェクト指向プログラミングと呼んでいます。
 Rubyは、すべてのデータをオブジェクトとし、オブジェクト同士がメッセージを伝播しながら動作するようにプログラムを作る、オブジェクト指向プログラミング言語なのです。</p>
 </div>
@@ -618,7 +618,7 @@ Welcome
 </div>
 <div class="paragraph">
 <p><code>new</code> メソッドだけでなく、Rubyのどのメソッドも、処理に必要な指示や情報を引数を使って渡せます。
-メソッドへ渡すデータは1つとは限りません。
+メソッドへ渡すデータは、1つとは限りません。
 複数の引数をメソッドに渡すときは、カンマ（ <code>,</code> ）で区切って並べます。</p>
 </div>
 <div class="paragraph">
@@ -670,11 +670,11 @@ String.new 'ここも文字列'</code></pre>
 <div class="paragraph">
 <p><a href="#ex0301_rb">リスト 1</a> 、 <a href="#ex0302_rb">リスト 8</a> では文字列を作成しました。
 文字列を作成すると、コンピュータのメモリ空間のどこかに作成した文字列が格納されているわけです。
-しかし、<a href="#ex0301_rb">リスト 1</a> 、 <a href="#ex0302_rb">リスト 8</a> のプログラムでは、一度作ってしまった文字列は、その後もう一度使いたくても参照する方法がありません。
+しかし、<a href="#ex0301_rb">リスト 1</a> や <a href="#ex0302_rb">リスト 8</a> のプログラムでは、一度作ってしまった文字列はその後もう一度使いたくても参照する方法がありません。
 同じ文字列を使いたくても、別に新しく文字列を作る必要があります。</p>
 </div>
 <div class="paragraph">
-<p>このことは、文字列ならさほど困らないように思えるかもしれませんが、数値の計算結果だった場合はどうでしょうか。
+<p>このことは、文字列ならさほど困らないように思えるでしょうが、数値の計算結果だった場合はどうでしょうか。
 <a href="#variable_less_computing">図 7</a> の左のように、途中までの計算結果をそのあとの計算で使うときに、もう1回そこまでの計算をやり直していては、プログラムはなかなか問題を解くことができないでしょう。
 それよりも、右のように途中までの計算結果を使いながら計算した方が便利ですよね。</p>
 </div>
@@ -822,7 +822,7 @@ puts str1</code></pre>
 <h3 id="_文字列を表示するprintメソッド">2.3. 文字列を表示する（printメソッド）</h3>
 <div class="paragraph">
 <p>さて、ここまで文字列を表示する方法として、おまじないのように <code>puts</code> メソッドを使っていました。
-文字列の表示によく使うもう一つのがメソッドが、 <code>print</code> メソッドです。</p>
+文字列の表示によく使うもう1つのメソッドが、 <code>print</code> メソッドです。</p>
 </div>
 <div id="print_sample01_rb" class="exampleblock">
 <div class="title">リスト 17. 【Ruby】 <code>print</code> メソッドを使って文字列を表示する</div>
@@ -961,14 +961,15 @@ print "ようこそ"
 </table>
 </div>
 <div class="paragraph">
-<p>うーん、これはどうでしょう。たしかに作成した文字列を表示することはできましたが、表示した2つの文字列はつながって表示されてしまいますね。
+<p>うーん、これはどうでしょう。
+たしかに作成した文字列は表示できましたが、表示した2つの文字列はつながって表示されてしまいますね。
 できれば1つ表示したら改行して2行に分けて表示したいものです。</p>
 </div>
 <div class="paragraph">
 <p>改行という処理にやってほしいことは、なにか目に見える文字を表示することではありません。
 ある文字以降の表示の開始位置を、次行の先頭に変えることです。
 このことを実現するために、ディスプレイなどの表示装置は「表示するときには目に見えない制御コード」をプログラムから送ってもらうという方法で表示位置を制御しています。
-プログラムを書くときに目に見えないコードでは扱いにくくて不便です。
+プログラムを書くとき、目に見えないコードがあると、扱いにくくて不便です。
 そこで、多くのプログラミング言語が、この指示を表現するために特別な記法を用意して、制御文字などと呼んでいます。
 Rubyの場合、改行の制御文字は <code>\n</code> （バックスラッシュは日本語のフォントでは円記号になります）という書き方で表します。
 「n」にはnewline（行替え）の意味が込められています。</p>
@@ -1109,11 +1110,13 @@ Welcome\nここも文字列</code></pre>
 <col>
 <col>
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">メソッド名</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">機能内容</p></td>
+<th class="tableblock halign-left valign-top">メソッド名</th>
+<th class="tableblock halign-left valign-top">機能内容</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>chop</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">最後に読み込んだ文字列($_)の最後の文字を取り除いた文字列を生成して返す</p></td>
@@ -1200,11 +1203,13 @@ Welcome\nここも文字列</code></pre>
 <col>
 <col>
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">制御文字等</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">意味</p></td>
+<th class="tableblock halign-left valign-top">制御文字等</th>
+<th class="tableblock halign-left valign-top">意味</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>\t</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">タブ</p></td>
@@ -1362,7 +1367,8 @@ prime100 = 541   <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 <div class="paragraph">
 <p>数値では、四則演算、剰余、べき乗の計算ができます。
 演算する数が整数か浮動小数点数かで、それぞれの演算も数値の型に合ったの演算になります。
-剰余は除算の余りを求める演算で、べき乗は左辺の数を右辺の回数だけ掛けた数を求める演算です。変数を使うこともできます</p>
+剰余は除算の余りを求める演算で、べき乗は左辺の数を右辺の回数だけ掛けた数を求める演算です。
+変数を使うこともできます。</p>
 </div>
 <table id="numarical_operation_list" class="tableblock frame-all grid-all fit-content">
 <caption class="title">表 3. 四則演算、剰余、べき乗の演算子</caption>
@@ -1370,11 +1376,13 @@ prime100 = 541   <i class="conum" data-value="4"></i><b>(4)</b></code></pre>
 <col>
 <col>
 </colgroup>
-<tbody>
+<thead>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">演算</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">演算子</p></td>
+<th class="tableblock halign-left valign-top">演算</th>
+<th class="tableblock halign-left valign-top">演算子</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>+</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">加算</p></td>
@@ -1654,7 +1662,7 @@ Rubyでは、この書式の指定方法を、元にしたC言語の関数の名
 <div class="sect2">
 <h3 id="_メソッドの実行結果や数値を文字列に埋め込む式展開">2.5. メソッドの実行結果や数値を文字列に埋め込む（式展開）</h3>
 <div class="paragraph">
-<p>メソッドが処理した結果や数値をを文字列に整形して表示することはよく行われることです。
+<p>メソッドが処理した結果や数値は、頻繁に文字列に整形して表示します。
 そこで、Rubyには便利な方法としてダブルクォートで囲まれた文字列の中に「式展開」するという方法が用意されています。</p>
 </div>
 <div class="paragraph">
@@ -2156,7 +2164,7 @@ sum = 0</code></pre>
 シンボルは、見かけは文字列とよく似ている、目に見えない固有の数値を持った定数です。</p>
 </div>
 <div class="paragraph">
-<p>配列が「0番目、1番目、…」と数えるところが、「 <code>apple</code> 番目、 <code>orange</code> 番目、…」となっているとイメージしてみるとよいでしょう（ <a href="#hash_index_image">図 9</a> ）。その代わり何番目かはわからなくなります。</p>
+<p>配列が「0番目, 1番目 …」と数えるところが、「 <code>apple</code> 番目, <code>orange</code> 番目 …」となっているとイメージしてみるとよいでしょう（ <a href="#hash_index_image">図 9</a> ）。その代わり何番目かはわからなくなります。</p>
 </div>
 <div id="hash_index_image" class="imageblock">
 <div class="content">
@@ -2397,7 +2405,7 @@ end</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-27 03:11:56 +0900
+Last updated 2021-04-27 22:51:10 +0900
 </div>
 </div>
 </body>
